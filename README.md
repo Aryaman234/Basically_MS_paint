@@ -3,7 +3,7 @@
 <p>This will be a downsized version of MS paint. IT will include the basic functions such as draw,change color of brush, erase, erase all, etc. In addtion, it will include a function that will create a line of symmetry.</p>
 
 <h2>Interaction</h2>
-<p>What is a interesting way that a user interacts with your program?</p>
+<p>My program allows user to draw whatever they want. It lets them explore their creativity. Since there is a line of symmetry function, users can make more symetrical shapes. This is useful because if you wanted to or draw a face or create blueprints for a building, this function would be useful. </p>
 
 <h2>Timeline</h2>
 
