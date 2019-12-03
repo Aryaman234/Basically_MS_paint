@@ -1,8 +1,9 @@
+// Press 1 , 2 or 3 to change stroke weight
+// Press o to turn off symmetry
+
 PImage eraserIcon;
 PImage symmetryIcon;
 PImage pencil;
-float oldX;
-float oldY;
 color black= color(0);
 color red = color(255, 36, 3);
 color blue = color(255, 243, 3);
@@ -10,6 +11,10 @@ color yellow = color(35, 3, 255);
 color erase = color(255);
 float masterStroke=1;
 int screen = 1;
+boolean symmetryV = false;
+boolean symmetryH = false;
+boolean symmetryOff = false;
+Drop d = new Drop();
 
 void setup()
 {
@@ -24,12 +29,13 @@ void setup()
 
 void draw() {
   strokeWeight(1);
-  line(615, 100, 675, 100);
-  strokeWeight(4);
-  line(615, 115, 675, 115);
-  strokeWeight(7);
-  line(615, 130, 675, 130);
-  
+  if (mousePressed) {
+    if (mouseY>10 && mouseY <60) {
+      if (mouseX >525 && mouseX <600) {
+        d.Update();
+      }
+    }
+  }
 
   if (screen==1) {
     if (mousePressed) {
@@ -59,31 +65,9 @@ void draw() {
       }
     }
     strokeWeight(masterStroke);
-
-    if (mousePressed)
-    {    
-      if (mouseX>615 && mouseX<675)
-      {    
-        if (mouseY==100)
-        {
-          masterStroke=1;
-        }
-        if (mouseY==115 )
-        {
-          masterStroke=4;
-        }
-        if (mouseY==130)
-        {
-          masterStroke=7;
-        }
-      }
-    }
-
     if (mousePressed) {
-      line(mouseX, mouseY, oldX, oldY);
+      line(pmouseX, pmouseY, mouseX, mouseY);
     }
-    oldX=mouseX;
-    oldY=mouseY;
     Display();
   }
 
@@ -100,6 +84,22 @@ void draw() {
         screen=screen +1;
       }
     }
+  }
+  if (symmetryV == true) {
+    strokeWeight(1);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+    line(724-pmouseX, pmouseY, 724-mouseX, mouseY);
+  }
+  if (symmetryH == true) {
+    strokeWeight(1);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+    line(pmouseX, 700-pmouseY, mouseX, 700-mouseY);
+  }
+
+  if (symmetryOff == true) {
+    symmetryH = false;
+    symmetryV = false;
+    line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
 
@@ -129,5 +129,37 @@ void Display() {
   rect(625, 10, 75, 50);
   fill(0);
   textSize(15);
-  text("Erase All",635,40);
+  text("Erase All", 635, 40);
+}
+
+void mouseReleased() {
+  if (mouseY>70 && mouseY <95) {
+    if (mouseX >525 && mouseX <600) {
+      symmetryV = true;
+    }
+  }
+  if (mouseY>95 && mouseY <120) {
+    if (mouseX >525 && mouseX <600) {
+      symmetryH = true;
+    }
+  }
+}
+
+
+
+
+void keyPressed() {
+  if (key == 'o') {
+    symmetryOff = true;
+  }
+
+  if ( key == '1') {
+    masterStroke=1;
+  }
+  if ( key == '2') {
+    masterStroke=4;
+  }
+  if ( key == '3') {
+    masterStroke=7;
+  }
 }
