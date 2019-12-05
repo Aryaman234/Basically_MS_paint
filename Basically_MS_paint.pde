@@ -1,9 +1,11 @@
 // Press 1 , 2 or 3 to change stroke weight
 // Press o to turn off symmetry
+// Press s to save
+// Press e to turn off drawing
+// Press d to turn on drawing
 
 PImage eraserIcon;
 PImage symmetryIcon;
-PImage pencil;
 color black= color(0);
 color red = color(255, 36, 3);
 color blue = color(255, 243, 3);
@@ -14,6 +16,8 @@ int screen = 1;
 boolean symmetryV = false;
 boolean symmetryH = false;
 boolean symmetryOff = false;
+boolean drop = false;
+boolean draw = false;
 Drop d = new Drop();
 
 void setup()
@@ -23,20 +27,11 @@ void setup()
   background(255);
   eraserIcon = loadImage ("eraser.png");
   symmetryIcon = loadImage ("symmetry.png");
-  pencil= loadImage("pencil.png");
   smooth();
 }
 
 void draw() {
   strokeWeight(1);
-  if (mousePressed) {
-    if (mouseY>10 && mouseY <60) {
-      if (mouseX >525 && mouseX <600) {
-        d.Update();
-      }
-    }
-  }
-
   if (screen==1) {
     if (mousePressed) {
       if (mouseY > 10 && mouseY < 60) {
@@ -52,9 +47,6 @@ void draw() {
         if (mouseX > 325 && mouseX < 400 ) {
           stroke(yellow);
         }
-        if (mouseX > 325 && mouseX < 400 ) {
-          stroke(yellow);
-        }
         if (mouseX > 25 && mouseX < 100 ) {
           stroke(erase);
         }
@@ -65,7 +57,7 @@ void draw() {
       }
     }
     strokeWeight(masterStroke);
-    if (mousePressed) {
+    if (draw == true) {
       line(pmouseX, pmouseY, mouseX, mouseY);
     }
     Display();
@@ -99,7 +91,6 @@ void draw() {
   if (symmetryOff == true) {
     symmetryH = false;
     symmetryV = false;
-    line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
 
@@ -132,19 +123,26 @@ void Display() {
   text("Erase All", 635, 40);
 }
 
-void mouseReleased() {
-  if (mouseY>70 && mouseY <95) {
+void mouseReleased() 
+{
+  if (mouseY>10 && mouseY <60) {
     if (mouseX >525 && mouseX <600) {
-      symmetryV = true;
+      d.Update();
     }
   }
-  if (mouseY>95 && mouseY <120) {
-    if (mouseX >525 && mouseX <600) {
-      symmetryH = true;
+  {
+    if (mouseY>70 && mouseY <95) {
+      if (mouseX >525 && mouseX <600) {
+        symmetryV = true;
+      }
+    }
+    if (mouseY>95 && mouseY <120) {
+      if (mouseX >525 && mouseX <600) {
+        symmetryH = true;
+      }
     }
   }
 }
-
 
 
 
@@ -161,5 +159,15 @@ void keyPressed() {
   }
   if ( key == '3') {
     masterStroke=7;
+  }
+  if (key == 's') {
+
+    saveFrame("screenshots/rename.png");
+  }
+  if (key == 'd') {
+    draw = true;
+  }
+  if (key == 'e') {
+    draw =false;
   }
 }
