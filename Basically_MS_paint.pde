@@ -1,4 +1,4 @@
-// Press 1 , 2 or 3 to change stroke weight
+// Press 1 , 2 ,3,4 to change stroke weight
 // Press o to turn off symmetry
 // Press s to save
 // Press e to turn off drawing
@@ -31,6 +31,7 @@ void setup()
 }
 
 void draw() {
+    Display();
   strokeWeight(1);
   if (screen==1) {
     if (mousePressed) {
@@ -60,7 +61,6 @@ void draw() {
     if (draw == true) {
       line(pmouseX, pmouseY, mouseX, mouseY);
     }
-    Display();
   }
 
   if (screen==2) {
@@ -104,6 +104,7 @@ void easterEgg() {
 }
 
 void Display() {
+  strokeWeight(1);
   fill(229, 227, 227);
   rect(-10, -10, 810, 80);
   image(eraserIcon, 25, 10, 75, 50);
@@ -150,7 +151,6 @@ void keyPressed() {
   if (key == 'o') {
     symmetryOff = true;
   }
-
   if ( key == '1') {
     masterStroke=1;
   }
@@ -159,6 +159,10 @@ void keyPressed() {
   }
   if ( key == '3') {
     masterStroke=7;
+  }
+  if (key == '4') {
+
+    masterStroke = 30;
   }
   if (key == 's') {
 
