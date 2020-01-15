@@ -1,9 +1,3 @@
-// Press 1 , 2 ,3,4 to change stroke weight
-// Press o to turn off symmetry
-// Press s to save
-// Press e to turn off drawing
-// Press d to turn on drawing
-
 PImage eraserIcon;
 PImage symmetryIcon;
 color black= color(0);
@@ -31,79 +25,101 @@ void setup()
 }
 
 void draw() {
-    Display();
   strokeWeight(1);
-  if (screen==1) {
-    if (mousePressed) {
-      if (mouseY > 10 && mouseY < 60) {
-        if (mouseX >125 && mouseX <200) {
+
+  if (mousePressed)
+  {  
+    if (mouseY>10 && mouseY <60) 
+    {
+      if (mouseX >525 && mouseX <600) 
+      {
+        drop=!drop;
+      }
+    }
+
+    if (mousePressed) 
+    {
+      if (mouseY > 10 && mouseY < 60) 
+      {
+        if (mouseX >125 && mouseX <200) 
+        {
           stroke(black);
         }
-        if (mouseX > 425 && mouseX < 500) {
+        if (mouseX > 425 && mouseX < 500) 
+        {
           stroke(red);
         }
-        if (mouseX > 225 && mouseX < 300) {
+        if (mouseX > 225 && mouseX < 300) 
+        {
           stroke(blue);
         }
-        if (mouseX > 325 && mouseX < 400 ) {
+        if (mouseX > 325 && mouseX < 400 ) 
+        {
           stroke(yellow);
         }
-        if (mouseX > 25 && mouseX < 100 ) {
+        if (mouseX > 25 && mouseX < 100 ) 
+        {
           stroke(erase);
         }
-        if (mouseX > 625 && mouseX < 700 ) {
+        if (mouseX > 625 && mouseX < 700 ) 
+        {
           background(255);
           Display();
         }
       }
     }
     strokeWeight(masterStroke);
-    if (draw == true) {
+    Display();
+
+    if (draw == true) 
+    {
       line(pmouseX, pmouseY, mouseX, mouseY);
     }
-  }
 
-  if (screen==2) {
-    easterEgg();
-  }
-
-  if (mousePressed)
-  {
-    if (mouseX>675 && mouseX<800)
+    if (mousePressed)
     {
-      if (mouseY>690 && mouseY<800)
+      draw=true;
+    }
+
+    if (drop == true) 
+    {
+      d.Update();
+    }
+
+    if ( drop == false)
+    {
+      Display();
+    }
+
+    if (symmetryV == true) 
+    {
+      if (mousePressed)
       {
-        screen=screen +1;
+        strokeWeight(masterStroke);    
+        line(pmouseX, pmouseY, mouseX, mouseY);
+        line(724-pmouseX, pmouseY, 724-mouseX, mouseY);
       }
     }
-  }
-  if (symmetryV == true) {
-    strokeWeight(1);
-    line(pmouseX, pmouseY, mouseX, mouseY);
-    line(724-pmouseX, pmouseY, 724-mouseX, mouseY);
-  }
-  if (symmetryH == true) {
-    strokeWeight(1);
-    line(pmouseX, pmouseY, mouseX, mouseY);
-    line(pmouseX, 700-pmouseY, mouseX, 700-mouseY);
-  }
+    if (symmetryH == true)
+    {
+      if (mousePressed)
+      {
+        strokeWeight(masterStroke);
+        line(pmouseX, pmouseY, mouseX, mouseY);
+        line(pmouseX, 700-pmouseY, mouseX, 700-mouseY);
+      }
+    }
 
-  if (symmetryOff == true) {
-    symmetryH = false;
-    symmetryV = false;
+    if (symmetryOff == true) 
+    {
+      symmetryH = false;
+      symmetryV = false;
+    }
   }
 }
 
-void easterEgg() {
-  noCursor();
-  background(255, 34, 5);
-  fill(0);
-  textSize(30);
-  text("Well, good job finding the easter egg", 100, 400);
-  text("Also, you broke my code. Thanks.", 123, 450);
-}
-
-void Display() {
+void Display() 
+{
   strokeWeight(1);
   fill(229, 227, 227);
   rect(-10, -10, 810, 80);
@@ -122,15 +138,12 @@ void Display() {
   fill(0);
   textSize(15);
   text("Erase All", 635, 40);
+  strokeWeight(masterStroke);
 }
 
 void mouseReleased() 
 {
-  if (mouseY>10 && mouseY <60) {
-    if (mouseX >525 && mouseX <600) {
-      d.Update();
-    }
-  }
+  draw=false;
   {
     if (mouseY>70 && mouseY <95) {
       if (mouseX >525 && mouseX <600) {
@@ -147,31 +160,31 @@ void mouseReleased()
 
 
 
-void keyPressed() {
-  if (key == 'o') {
+void keyPressed() 
+{
+  if (key == 'o') 
+  {
     symmetryOff = true;
   }
-  if ( key == '1') {
+
+  if ( key == '1') 
+  {
     masterStroke=1;
   }
-  if ( key == '2') {
+  if ( key == '2') 
+  {
     masterStroke=4;
   }
-  if ( key == '3') {
+  if ( key == '3') 
+  {
     masterStroke=7;
   }
-  if (key == '4') {
-
-    masterStroke = 30;
+  if ( key == '4') 
+  {
+    masterStroke=30;
   }
-  if (key == 's') {
-
+  if (key == 's') 
+  {
     saveFrame("screenshots/rename.png");
-  }
-  if (key == 'd') {
-    draw = true;
-  }
-  if (key == 'e') {
-    draw =false;
   }
 }
