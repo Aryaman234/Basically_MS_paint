@@ -6,7 +6,6 @@ color blue = color(255, 243, 3);
 color yellow = color(35, 3, 255);
 color erase = color(255);
 float masterStroke=1;
-int screen = 1;
 boolean symmetryV = false;
 boolean symmetryH = false;
 boolean symmetryOff = false;
@@ -24,8 +23,36 @@ void setup()
   smooth();
 }
 
-void draw() {
-  strokeWeight(1);
+void draw() 
+{
+  strokeWeight(1); 
+  if (mousePressed)
+  {
+    if (mouseY>70 && mouseY <95) 
+    {
+      if (mouseX >525 && mouseX <600) 
+      {
+        if (drop==true)
+        {
+          symmetryV = true;
+          symmetryOff=false;
+          symmetryH=false;
+        }
+      }
+    }
+  }
+  if (mouseY>95 && mouseY <120) 
+  {
+    if (mouseX >525 && mouseX <600) 
+    {
+      if (drop==true)
+      {
+        symmetryH = true;
+        symmetryOff=false;
+        symmetryV=false;
+      }
+    }
+  }
 
   if (mousePressed)
   {  
@@ -86,11 +113,6 @@ void draw() {
       d.Update();
     }
 
-    if ( drop == false)
-    {
-      Display();
-    }
-
     if (symmetryV == true) 
     {
       if (mousePressed)
@@ -118,11 +140,22 @@ void draw() {
   }
 }
 
+
 void Display() 
-{
+{ 
   strokeWeight(1);
+  fill(255);
+  strokeWeight(3);
   fill(229, 227, 227);
-  rect(-10, -10, 810, 80);
+  strokeWeight(1);
+  rect(-10, 620, 740, 80);
+  fill(0);
+  textSize(20);
+  text("Press s to save into screenshots folder", 125, 640);
+  text("Press o to turn off symmetry", 125, 665);
+  text("Press 1,2,3 or 4 to change stroke size", 125, 690);
+  fill(229, 227, 227);
+  rect(-10, -10, 740, 80);
   image(eraserIcon, 25, 10, 75, 50);
   fill(0);
   rect(125, 10, 75, 50);
@@ -144,18 +177,6 @@ void Display()
 void mouseReleased() 
 {
   draw=false;
-  {
-    if (mouseY>70 && mouseY <95) {
-      if (mouseX >525 && mouseX <600) {
-        symmetryV = true;
-      }
-    }
-    if (mouseY>95 && mouseY <120) {
-      if (mouseX >525 && mouseX <600) {
-        symmetryH = true;
-      }
-    }
-  }
 }
 
 

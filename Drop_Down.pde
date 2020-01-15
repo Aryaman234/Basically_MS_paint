@@ -1,15 +1,8 @@
 class Drop
 {
-  int main;
-  Drop() {
-    main=1;
-  }
 
-  void mRect() {
-    strokeWeight(1);
-    fill(229, 227, 227);
-    rect(525, 70, 75, 50);
-    strokeWeight(masterStroke);
+  Drop() {
+ 
   }
 
   void vRect() {
@@ -32,16 +25,8 @@ class Drop
     strokeWeight(masterStroke);
   }
 
-  void bye()
-  {
-    fill(255);
-    rect(525, 70, 75, 50);
-  }
-
   void Update()
   {
-
-    mRect();
     hRect();
     vRect();
   }
